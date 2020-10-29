@@ -1,20 +1,5 @@
 version: '3.2'
 services:
-  mysql:
-    container_name: v-mysql
-    build: ./mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: soubao@2015
-      MYSQL_ROOT_HOST: '%'
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/config/my.cnf:/etc/my.cnf
-    ports:
-      - "3307:3306"
-    restart: always
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
   redis:
     container_name: v-redis
     image: redis
@@ -40,7 +25,21 @@ services:
       options:
         max-size: "200k"
         max-file: "10"
-
+  mysql:
+    container_name: v-mysql
+    build: ./mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: soubao@2015
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/config/my.cnf:/etc/my.cnf
+    ports:
+      - "3307:3306"
+    restart: always
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     
 
  
