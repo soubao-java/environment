@@ -2490,7 +2490,7 @@ CREATE TABLE `store_apply`  (
   `sc_bail` mediumint(8) NULL DEFAULT 0 COMMENT '店铺分类保证金',
   `sg_id` tinyint(2) NULL DEFAULT 0 COMMENT '店铺等级编号',
   `sg_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '店铺等级名称',
-  `store_class_ids` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '申请分类佣金信息',
+  `store_class_ids` text CHARACTER SET utf8 COLLATE utf8_general_ci COMMENT '申请分类佣金信息',
   `paying_amount` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '付款金额',
   `paying_amount_cert` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '付款凭证',
   `apply_state` tinyint(2) NULL DEFAULT 0 COMMENT '店铺申请状态 0未审核，1通过，2拒绝',
