@@ -8,8 +8,6 @@ RUN yum -y install crontabs
 RUN yum -y install dos2unix
 RUN yum -y install sudo
 #修正时区
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-	&& echo 'Asia/Shanghai' >/etc/timezone \
-	&& echo '%mysql ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers \
+RUN echo '%mysql ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers \
 	&& rm -rf /var/lib/apt/lists/*  \	  
 	&& chmod a+x -R /docker-entrypoint-initdb.d

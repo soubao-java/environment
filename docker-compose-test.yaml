@@ -34,6 +34,7 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/config/my.cnf:/etc/my.cnf
+      - /etc/localtime:/etc/localtime:ro
     ports:
       - "3307:3306"
     restart: always
