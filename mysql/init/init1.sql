@@ -1554,6 +1554,105 @@ CREATE TABLE `wx_user`  (
   INDEX `uid_2`(`uid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '微信公共帐号' ROW_FORMAT = Dynamic;
 
+-- ----------------------------
+-- Table structure for poster
+-- ----------------------------
+DROP TABLE IF EXISTS `poster`;
+CREATE TABLE `poster`  (
+  `poster_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '海报名称',
+  `poster_link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '链接地址',
+  `start_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '开始时间',
+  `end_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '结束时间',
+  `img_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'uri',
+  PRIMARY KEY (`poster_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for poster_admin
+-- ----------------------------
+DROP TABLE IF EXISTS `poster_admin`;
+CREATE TABLE `poster_admin`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `admin_id` int(11) NOT NULL COMMENT 'adminid',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `poster_id` int(11) NOT NULL COMMENT '创建海报表外键',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for poster_seller
+-- ----------------------------
+DROP TABLE IF EXISTS `poster_seller`;
+CREATE TABLE `poster_seller`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `store_cat_id` int(11) NOT NULL COMMENT '本店类型id',
+  `store_id` int(11) NOT NULL COMMENT '商家id',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `poster_id` int(11) NOT NULL COMMENT '创建海报表外键',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trial_apply
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_apply`;
+CREATE TABLE `trial_apply`  (
+  `apply_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `trial_id` int(10) NOT NULL DEFAULT 0 COMMENT '试用商品主键',
+  `user_id` int(10) NOT NULL DEFAULT 0 COMMENT '用户id',
+  `is_auth` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否认证：0未支付待认证，1认证，2已支付不通过',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
+  PRIMARY KEY (`apply_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '申请试用名单' ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trial_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_goods`;
+CREATE TABLE `trial_goods`  (
+  `trial_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `goods_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品id',
+  `goods_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '商品名称',
+  `store_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '店铺id',
+  `template_id` int(10) NOT NULL DEFAULT 0 COMMENT '运费模板，0为包邮',
+  `trialt_num` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '试用数量',
+  `limit_num` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '最多试用人数',
+  `is_auth` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否通过平台审核，0待审，1通过，2未通过',
+  `is_close` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '平台是否关闭',
+  `is_end` tinyint(1) NOT NULL COMMENT '是否到点结束',
+  `start_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '开始时间',
+  `end_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '结束时间',
+  `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除 0,为可用，1为不可用',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
+  `state` int(11) NOT NULL COMMENT '0未开始，1已开始，2已结束',
+  PRIMARY KEY (`trial_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '试用商品' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trial_poster
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_poster`;
+CREATE TABLE `trial_poster`  (
+  `trial_poster_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片上传路径',
+  `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '跳转地址',
+  `state` int(255) NOT NULL COMMENT '1可用 0不可以用',
+  PRIMARY KEY (`trial_poster_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trial_share
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_share`;
+CREATE TABLE `trial_share`  (
+  `share_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '分享主键id',
+  `trial_id` int(11) NOT NULL COMMENT '试用商品id',
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  PRIMARY KEY (`share_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 
 
@@ -2118,6 +2217,96 @@ CREATE TABLE `wx_pay`  (
   `apiclient_cert` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '支付商户证书',
   `apiclient_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '支付商户证书密钥'
 ) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for trial_order
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_order`;
+CREATE TABLE `trial_order`  (
+  `order_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '试用订单id',
+  `order_sn` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单sn',
+  `store_id` int(10) NOT NULL COMMENT '店铺id',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户id',
+  `is_shipping` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '未(待)发货0，确认发货1, 已发货2，部分发货3,',
+  `is_receive` tinyint(1) NOT NULL COMMENT '未收货0，已收货1，部分收货2',
+  `is_paid` tinyint(1) NOT NULL COMMENT '未支付0，已支付1，部分支付2',
+  `is_cancel` tinyint(1) NOT NULL COMMENT '未取消0，已取消1',
+  `is_refund` tinyint(1) NOT NULL COMMENT '未退款0，已退款，部分退款',
+  `is_comment` tinyint(1) NOT NULL COMMENT '未评价，已评价',
+  `goods_price` decimal(10, 2) UNSIGNED NOT NULL COMMENT '商品总价',
+  `total_amount` decimal(10, 2) UNSIGNED NOT NULL COMMENT '订单总价',
+  `user_money` decimal(10, 2) UNSIGNED NOT NULL COMMENT '用户余额',
+  `order_amount` decimal(10, 2) UNSIGNED NOT NULL COMMENT '订单应付金额',
+  `pay_oauth` tinyint(1) NOT NULL COMMENT '第三方支付平台',
+  `transaction_id` varchar(250) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '第三方支付平台交易流水号',
+  `gmt_paid` datetime(0) NULL DEFAULT NULL COMMENT '支付时间',
+  `gmt_receive` datetime(0) NULL DEFAULT NULL COMMENT '收货时间',
+  `gmt_shipping` datetime(0) NULL DEFAULT NULL COMMENT '发货时间',
+  `deleted` tinyint(10) NOT NULL DEFAULT 0 COMMENT '软删除',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
+  `shipping_price` decimal(10, 2) UNSIGNED NOT NULL COMMENT '邮费',
+  PRIMARY KEY (`order_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '试用订单' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trial_order_deliver
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_order_deliver`;
+CREATE TABLE `trial_order_deliver`  (
+  `deliver_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '发货id',
+  `store_id` int(10) NOT NULL DEFAULT 0 COMMENT '店铺id',
+  `shipping_id` int(10) NOT NULL DEFAULT 0 COMMENT '收货id',
+  `shipping_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '物流code',
+  `shipping_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '物流名称',
+  `shipping_sn` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '物流单号',
+  `consignor_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发货人姓名',
+  `consignor_mobile` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发货人手机号',
+  `consignor_province_id` int(10) NOT NULL DEFAULT 0 COMMENT '发货人省id',
+  `consignor_city_id` int(10) NOT NULL DEFAULT 0 COMMENT '发货人市id',
+  `consignor_district_id` int(10) NOT NULL DEFAULT 0 COMMENT '发货人区id',
+  `consignor_town_id` int(10) NOT NULL DEFAULT 0 COMMENT '发货人镇id',
+  `consignor_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发货人详细地址',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`deliver_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '试用订单发货' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trial_order_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_order_goods`;
+CREATE TABLE `trial_order_goods`  (
+  `order_goods_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '订单商品id',
+  `order_sn` bigint(20) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单编号',
+  `goods_id` int(10) NOT NULL DEFAULT 0 COMMENT '商品id',
+  `trial_apply_id` int(10) NOT NULL COMMENT '试用名单id',
+  `goods_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '商品名称',
+  `goods_num` int(10) UNSIGNED NOT NULL DEFAULT 1 COMMENT '商品数',
+  `goods_price` decimal(10, 2) UNSIGNED NOT NULL COMMENT '商品原价',
+  `pay_price` decimal(10, 2) UNSIGNED NOT NULL COMMENT '商品购买价',
+  `is_shipping` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '未发货0，已发货1',
+  `is_comment` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否评价',
+  PRIMARY KEY (`order_goods_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '试用订单商品' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trial_order_shipping
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_order_shipping`;
+CREATE TABLE `trial_order_shipping`  (
+  `shipping_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '发货单id',
+  `order_sn` bigint(20) NOT NULL DEFAULT 0 COMMENT '订单编号',
+  `consignee_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '收货人姓名',
+  `consignee_mobile` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '收货人手机号',
+  `consignee_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '收货人email',
+  `consignee_province_id` int(10) NOT NULL COMMENT '收货人省id',
+  `consignee_city_id` int(10) NOT NULL DEFAULT 0 COMMENT '收货人市id',
+  `consignee_district_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '收货人区id',
+  `consignee_town_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '收货人镇id',
+  `consignee_address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '收货人详细地址',
+  PRIMARY KEY (`shipping_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '试用订单收货人信息' ROW_FORMAT = Dynamic;
 
 
 SET FOREIGN_KEY_CHECKS = 1;
