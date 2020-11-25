@@ -3,6 +3,9 @@ services:
   redis:
     container_name: v-redis
     image: redis
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     ports:
       - "6379:6379"
     network_mode: "host"
@@ -15,6 +18,9 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=soubao
       - RABBITMQ_DEFAULT_PASS=soubao
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     ports:
       - "15672:15672"
       - "5672:5672"
