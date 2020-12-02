@@ -1720,7 +1720,7 @@ CREATE TABLE `comment`  (
   `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户id',
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '评论内容',
   `add_time` int(11) UNSIGNED NOT NULL COMMENT '评论时间',
-  `ip_address` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '评论ip地址',
+  `ip_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '评论ip地址',
   `is_show` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '是否显示;0:不显示；1:显示',
   `img` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '晒单图片',
   `spec_key_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
