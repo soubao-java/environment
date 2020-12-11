@@ -3018,7 +3018,7 @@ CREATE TABLE `email_receive`  (
   `receiver_role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '角色，0管理员，1商家，2用户',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '用户接受邮箱',
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `logid` int(11) NOT NULL COMMENT '邮件表id',
+  `email_log_id` int(11) NOT NULL COMMENT '邮件表id',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '邮件接受表' ROW_FORMAT = Dynamic;
 
