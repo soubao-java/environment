@@ -2122,17 +2122,15 @@ CREATE TABLE `rebate_log`  (
 DROP TABLE IF EXISTS `recharge`;
 CREATE TABLE `recharge`  (
   `order_id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL DEFAULT 0 COMMENT '会员ID',
-  `nickname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '会员昵称',
-  `order_sn` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '充值单号',
-  `account` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '充值金额',
-  `ctime` int(11) NULL DEFAULT NULL COMMENT '充值时间',
-  `pay_time` int(11) NULL DEFAULT NULL COMMENT '支付时间',
-  `pay_code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `pay_name` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '支付方式',
-  `pay_status` tinyint(1) NULL DEFAULT 0 COMMENT '充值状态0:待支付 1:充值成功 2:交易关闭',
-  `transaction_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '第三方平台交易流水号',
-  `remark` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
+  `user_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '会员ID',
+  `order_sn` varchar(30) NOT NULL DEFAULT '' COMMENT '充值单号',
+  `account` decimal(10,2) NOT NULL COMMENT '充值金额',
+  `ctime` int(11) NOT NULL COMMENT '充值时间',
+  `pay_time` int(11) NOT NULL COMMENT '支付时间',
+  `pay_trade_type` varchar(20) NOT NULL DEFAULT '' COMMENT ' ''如果为微信支付(JSAPI,NATIVE,APP,MWEB)'',',
+  `pay_oauth` int(80) DEFAULT NULL COMMENT '支付方式第三方支付平台:1微信支付,2支付宝3:stripe,4:p',
+  `pay_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '充值状态0:待支付 1:充值成功 ',
+  `transaction_id` varchar(100) NOT NULL DEFAULT '' COMMENT '第三方平台交易流水号',
   PRIMARY KEY (`order_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 109 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
