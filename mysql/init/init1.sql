@@ -1644,6 +1644,19 @@ CREATE TABLE `trial_poster`  (
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for trial_record
+-- ----------------------------
+DROP TABLE IF EXISTS `trial_record`;
+CREATE TABLE `trial_record` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '试用记录id',
+  `user_id` int(11)  NOT NULL COMMENT '用户id',
+  `store_id` int(11) NOT NULL COMMENT '商家id',
+  `win_count` int(11) NOT NULL COMMENT '中奖次数',
+  `comment_count` int(11) NOT NULL COMMENT '评论次数',
+  PRIMARY KEY (`id`)
+)  ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for trial_share
 -- ----------------------------
 DROP TABLE IF EXISTS `trial_share`;
