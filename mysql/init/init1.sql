@@ -1125,7 +1125,6 @@ CREATE TABLE `prom_goods`  (
   `group` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '适用范围',
   `store_id` int(10) NULL DEFAULT 0 COMMENT '商家店铺id',
   `orderby` int(10) NULL DEFAULT 0 COMMENT '排序',
-  `prom_img` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '活动宣传图片',
   `recommend` tinyint(1) NULL DEFAULT 0 COMMENT '是否推荐',
   `buy_limit` int(10) NULL DEFAULT NULL COMMENT '每人限购数',
   `is_deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '软删除',
