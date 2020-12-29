@@ -17,6 +17,11 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
   redis:
     container_name: v-redis
     image: redis
@@ -25,6 +30,11 @@ services:
     network_mode: "host"
     restart: always
     command: redis-server --requirepass SOUBAO@99
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
 
   rabbitmq:
     container_name: v-rabbitmq
