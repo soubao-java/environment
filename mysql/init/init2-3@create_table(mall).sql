@@ -1084,7 +1084,7 @@ DROP TABLE IF EXISTS `stock_log`;
 CREATE TABLE `stock_log`  (
   `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `goods_id` int(11) NULL DEFAULT NULL COMMENT '商品ID',
-  `goods_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名称',
+  `goods_name` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品名称',
   `goods_spec` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '商品规格',
   `order_sn` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单编号',
   `store_id` int(11) NULL DEFAULT NULL COMMENT '商家ID',
