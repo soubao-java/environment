@@ -142,4 +142,57 @@ CREATE TABLE `log`  (
   PRIMARY KEY (`log_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
 
+-- ----------------------------
+-- Table structure for admin_role
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_role`;
+CREATE TABLE `admin_role`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `admin_id` int(10) NOT NULL DEFAULT 0 COMMENT '管理员id',
+  `role_id` int(10) NOT NULL DEFAULT 0 COMMENT '角色id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu`  (
+  `menu_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '菜单id',
+  `parent_id` int(10) NOT NULL DEFAULT 0 COMMENT '父菜单ID，菜单层级深度不能超过5级',
+  `parent_id_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '父路径,以逗号分隔',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '菜单名称',
+  `sort` int(10) NOT NULL DEFAULT 1 COMMENT '排序',
+  `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '前端跳转url',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
+  PRIMARY KEY (`menu_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for role
+-- ----------------------------
+DROP TABLE IF EXISTS `role`;
+CREATE TABLE `role`  (
+  `role_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '角色id',
+  `role_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '角色名称',
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '角色描述',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0未删除1已删除',
+  PRIMARY KEY (`role_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `role_menu`;
+CREATE TABLE `role_menu`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `role_id` int(10) NOT NULL DEFAULT 0 COMMENT '\r\n角色id',
+  `menu_id` int(10) NOT NULL DEFAULT 0 COMMENT '菜单id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
 SET FOREIGN_KEY_CHECKS = 1;
