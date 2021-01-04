@@ -160,7 +160,7 @@ DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
   `menu_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '菜单id',
   `parent_id` int(10) NOT NULL DEFAULT 0 COMMENT '父菜单ID，菜单层级深度不能超过5级',
-  `parent_id_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '父路径,以逗号分隔',
+  `parent_id_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '父路径,以逗号分隔',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '菜单名称',
   `sort` int(10) NOT NULL DEFAULT 1 COMMENT '排序',
   `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '前端跳转url',
