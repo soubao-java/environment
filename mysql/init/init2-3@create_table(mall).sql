@@ -781,6 +781,22 @@ CREATE TABLE `menu_cfg`  (
   PRIMARY KEY (`menu_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
+
+-- ----------------------------
+-- Table structure for navigation
+-- ----------------------------
+DROP TABLE IF EXISTS `navigation`;
+CREATE TABLE `navigation` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '导航主键',
+  `name` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '导航名称',
+  `is_show` int(10) NOT NULL COMMENT '是否显示:1显示，2不显示',
+  `is_new` int(10) NOT NULL COMMENT '是否新窗口：1是，2否',
+  `url` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '跳转路径',
+  `position` int(255) NOT NULL COMMENT '位置:1前台顶部，2前台底部，3商家底部',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+
+
 -- ----------------------------
 -- Table structure for news
 -- ----------------------------
