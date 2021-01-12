@@ -793,6 +793,7 @@ CREATE TABLE `navigation` (
   `is_new` int(10) NOT NULL COMMENT '是否新窗口：1是，2否',
   `url` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '跳转路径',
   `position` int(255) NOT NULL COMMENT '位置:1前台顶部，2前台底部，3商家底部',
+  `affiliation` int(10) NOT NULL COMMENT '归属：0pc，1h5',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
