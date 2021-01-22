@@ -714,6 +714,422 @@ CREATE TABLE `group_buy_goods_item`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '团购活动商品表' ROW_FORMAT = Fixed;
 
+
+-- ----------------------------
+-- Table structure for h5_diy_base_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_base_menu`;
+CREATE TABLE `h5_diy_base_menu` (
+  `base_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '底部菜单主键',
+  `page_id` int(11) NOT NULL COMMENT '外键',
+  `em_id` int(11) NOT NULL COMMENT '外键',
+  `word_color` varchar(255) NOT NULL COMMENT '字体颜色',
+  PRIMARY KEY (`base_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '底部菜单组件表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_base_menu_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_base_menu_detail`;
+CREATE TABLE `h5_diy_base_menu_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `base_id` int(11) NOT NULL COMMENT '底部菜单外键',
+  `not_img` varchar(255) NOT NULL COMMENT '未选中图片',
+  `yes_img` varchar(255) NOT NULL COMMENT '选中图片',
+  `navigation_name` varchar(255) NOT NULL COMMENT '导航名称',
+  `url` varchar(255) NOT NULL COMMENT '链接目标',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '底部菜单组件详情表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_coupon
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_coupon`;
+CREATE TABLE `h5_diy_coupon` (
+  `cp_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '优惠卷组件id',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `cp_style` int(11) NOT NULL COMMENT '样式1,2',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`cp_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠卷组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_coupon_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_coupon_detail`;
+CREATE TABLE `h5_diy_coupon_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cp_id` int(11) NOT NULL COMMENT '自定义优惠卷外键',
+  `coupon_id` int(11) NOT NULL COMMENT '优惠卷外键',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠卷组件详情表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_element
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_element`;
+CREATE TABLE `h5_diy_element` (
+  `em_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '排序分类表',
+  `page_id` int(11) NOT NULL COMMENT '页面id',
+  `sort` int(255) NOT NULL COMMENT '1~n...',
+  `module_type` int(255) NOT NULL COMMENT '主键类型',
+  PRIMARY KEY (`em_id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '排序分类表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_entrance
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_entrance`;
+CREATE TABLE `h5_diy_entrance` (
+  `entrance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '快捷入口id',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `style` int(255) NOT NULL COMMENT '样式选择，0：正方形 ，1：圆形',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`entrance_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '快捷入口组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_entrance_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_entrance_detail`;
+CREATE TABLE `h5_diy_entrance_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `entrance_id` int(11) NOT NULL COMMENT '入口外键',
+  `entrance_img` varchar(255) NOT NULL DEFAULT '' COMMENT '入口图片',
+  `entrance_name` varchar(255) NOT NULL COMMENT '入口名称',
+  `entrance_url` varchar(255) NOT NULL DEFAULT '' COMMENT '入口地址',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '快捷入口组件详情表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_goods`;
+CREATE TABLE `h5_diy_goods` (
+  `list_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品列表主键',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `layout` int(255) NOT NULL COMMENT '0,默认，1:橱窗式,2:列表式,3:海报式',
+  `goods_count` int(255) NOT NULL COMMENT '商品数量',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `is_show_name` int(255) NOT NULL COMMENT '列表名称是否显示 0默认显示，1隐藏',
+  `activity_type` int(255) NOT NULL COMMENT '活动类型 0抢购,1团购，2优惠促销,3预售,4虚拟,5拼团,6。。。',
+  `sort_type` int(255) NOT NULL COMMENT '排序方式',
+  PRIMARY KEY (`list_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品列表组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_goods_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_goods_detail`;
+CREATE TABLE `h5_diy_goods_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `list_id` int(11) NOT NULL COMMENT '商品列表外键',
+  `list_name` varchar(255) NOT NULL COMMENT '列表名称',
+  `conditions` int(255) NOT NULL COMMENT '0：按条件选取 1手动',
+  `goods_ids` varchar(255) NOT NULL COMMENT '多个商品',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品列表组件详情表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_img
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_img`;
+CREATE TABLE `h5_diy_img` (
+  `img_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '图片主键id',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `width` varchar(255) NOT NULL COMMENT '宽度',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `img` varchar(255) NOT NULL COMMENT '图片地址',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '链接地址',
+  PRIMARY KEY (`img_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '图片组件表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_img_word
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_img_word`;
+CREATE TABLE `h5_diy_img_word` (
+  `img_word_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自定义图文主键',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `arrange_type` int(255) NOT NULL COMMENT '排列样式,0:左图右文,1:左文右图,2:上下单图,3:上下双图,4:上下三图,',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `title` varchar(255) NOT NULL COMMENT '标题',
+  `intro` varchar(255) NOT NULL COMMENT '简介',
+  `url` varchar(255) NOT NULL COMMENT '链接地址',
+  PRIMARY KEY (`img_word_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '自定义图文组件表' ROW_FORMAT = Dynamic;
+
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_img_word_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_img_word_detail`;
+CREATE TABLE `h5_diy_img_word_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `img_word_id` int(11) NOT NULL COMMENT '自定义图文外键',
+  `img` varchar(255) NOT NULL COMMENT '图片地址',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '自定义图文组件详情表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_loop_ad
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_loop_ad`;
+CREATE TABLE `h5_diy_loop_ad` (
+  `loop_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '轮播广告id',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `loop_interval` varchar(255) NOT NULL COMMENT '轮播间隔',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`loop_id`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播广告组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_loop_ad_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_loop_ad_detail`;
+CREATE TABLE `h5_diy_loop_ad_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `loop_id` int(11) NOT NULL COMMENT '自定义轮播外键',
+  `img` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '跳转路径',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播广告组件详情表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_loop_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_loop_goods`;
+CREATE TABLE `h5_diy_loop_goods` (
+  `loop_goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '轮播图片',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `goods_count` int(255) NOT NULL COMMENT '商品数量',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `is_show_title` int(255) NOT NULL COMMENT '是否显示列表名称 0：显示',
+  `goods_sort` int(255) NOT NULL COMMENT '商品显示排序',
+  `title_name` varchar(255) DEFAULT NULL COMMENT '列表名称',
+  PRIMARY KEY (`loop_goods_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播图片组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_loop_goods_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_loop_goods_detail`;
+CREATE TABLE `h5_diy_loop_goods_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `loop_goods_id` int(11) NOT NULL COMMENT '轮播商品外键',
+  `goods_id` int(11) NOT NULL COMMENT '商品id',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播图片组件详情表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_marketing
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_marketing`;
+CREATE TABLE `h5_diy_marketing` (
+  `marketing_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '营销id',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `marketing_type` varchar(255) NOT NULL COMMENT '活动0拼团，1秒杀',
+  `is_show_name` int(255) NOT NULL COMMENT '0使用列表名称 1不使用列表名称',
+  `layout` int(255) NOT NULL COMMENT '0橱窗 ,1列表',
+  `activity_title` varchar(255) DEFAULT NULL COMMENT '活动标题',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`marketing_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_news
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_news`;
+CREATE TABLE `h5_diy_news` (
+  `news_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '新闻',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `below_space` varchar(255) NOT NULL DEFAULT '' COMMENT '下间距',
+  `news_count` int(11) NOT NULL COMMENT '新闻个数',
+  `news_title` varchar(255) NOT NULL DEFAULT '' COMMENT '新闻主题',
+  PRIMARY KEY (`news_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '新闻组件表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for h5_diy_news_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_news_detail`;
+CREATE TABLE `h5_diy_news_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `news_id` int(11) NOT NULL COMMENT '自定义新闻外键',
+  `article_id` int(11) NOT NULL COMMENT '选中新闻外键',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '新闻组件详情表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_notice
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_notice`;
+CREATE TABLE `h5_diy_notice` (
+  `notice_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '滚动公告主键',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `notice_img` varchar(255) NOT NULL COMMENT '公告图片',
+  `back_color` varchar(255) DEFAULT NULL COMMENT '背景颜色',
+  `word_color` varchar(255) NOT NULL COMMENT '字体颜色',
+  `word_sizi` varchar(255) NOT NULL COMMENT '字体大小',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`notice_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '滚动公告组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_notice_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_notice_detail`;
+CREATE TABLE `h5_diy_notice_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '滚动公告主键数据外表',
+  `notice_id` int(11) NOT NULL COMMENT '公告外键',
+  `url` varchar(255) NOT NULL COMMENT '链接位置',
+  `content` varchar(255) NOT NULL COMMENT '公告内容',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '滚动公告组件详情表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_page
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_page`;
+CREATE TABLE `h5_diy_page` (
+  `page_id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_name` varchar(255) NOT NULL,
+  `is_show` int(255) NOT NULL DEFAULT '0' COMMENT '0：不显示，1：显示',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`page_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '页面表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_search
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_search`;
+CREATE TABLE `h5_diy_search` (
+  `search_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '搜索框',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL DEFAULT '0' COMMENT '排序默认为0',
+  `type` int(255) NOT NULL COMMENT '显示样式',
+  PRIMARY KEY (`search_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '搜索框组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_shop
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_shop`;
+CREATE TABLE `h5_diy_shop` (
+  `shops_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '多店铺主键',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `seek_radii` varchar(255) NOT NULL COMMENT '搜索半径',
+  `top_word` varchar(255) NOT NULL COMMENT '顶部文字',
+  PRIMARY KEY (`shops_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '多店铺组件表' ROW_FORMAT = Dynamic;
+
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_text
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_text`;
+CREATE TABLE `h5_diy_text` (
+  `text_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '文本导航主键',
+  `page_id` int(11) NOT NULL COMMENT '页面id',
+  `em_id` int(11) NOT NULL COMMENT '排序id',
+  `text_site` int(255) NOT NULL COMMENT '左 0 ，中1，右 2',
+  `back_color` varchar(255) NOT NULL DEFAULT '' COMMENT '背景颜色',
+  `word_color` varchar(255) NOT NULL DEFAULT '' COMMENT '字体颜色',
+  `below_space` varchar(255) NOT NULL DEFAULT '' COMMENT '下间距',
+  `word_sizi` varchar(255) NOT NULL COMMENT '字体大小',
+  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '文本标签',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '路径',
+  PRIMARY KEY (`text_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '文本导航主键组件表' ROW_FORMAT = Dynamic;
+
+
+-- ----------------------------
+-- Table structure for h5_diy_video
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_video`;
+CREATE TABLE `h5_diy_video` (
+  `video_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自定义视频主键',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `video_url` varchar(255) NOT NULL DEFAULT '' COMMENT '视频url',
+  `video_img` varchar(255) NOT NULL COMMENT '视频封面',
+  PRIMARY KEY (`video_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '自定义视频组件表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_window
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_window`;
+CREATE TABLE `h5_diy_window` (
+  `window_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '橱窗id',
+  `page_id` int(11) NOT NULL COMMENT '页面外键',
+  `em_id` int(11) NOT NULL COMMENT '排序外键',
+  `window_type` int(255) NOT NULL COMMENT '橱窗样式',
+  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`window_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '橱窗组件表' ROW_FORMAT = Dynamic;
+
+
+
+-- ----------------------------
+-- Table structure for h5_diy_window_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_window_detail`;
+CREATE TABLE `h5_diy_window_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `window_id` int(11) NOT NULL COMMENT '橱窗外键',
+  `window_img` varchar(255) NOT NULL COMMENT '橱窗图片',
+  `window_url` varchar(255) NOT NULL COMMENT '橱窗地址',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '橱窗组件详情表' ROW_FORMAT = Dynamic;
+
+
 -- ----------------------------
 -- Table structure for help
 -- ----------------------------
