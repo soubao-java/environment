@@ -1038,6 +1038,21 @@ CREATE TABLE `h5_diy_page` (
 
 
 
+
+-- ----------------------------
+-- Table structure for h5_diy_rich_text
+-- ----------------------------
+DROP TABLE IF EXISTS `h5_diy_rich_text`;
+CREATE TABLE `h5_diy_rich_text` (
+  `rich_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '富文本组件id',
+  `page_id` int(11) NOT NULL,
+  `em_id` int(11) NOT NULL,
+  `back_color` varchar(255) NOT NULL,
+  `below_space` varchar(255) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  PRIMARY KEY (`rich_id`)
+) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '富文本组件' ROW_FORMAT = Dynamic;
+
 -- ----------------------------
 -- Table structure for h5_diy_search
 -- ----------------------------
