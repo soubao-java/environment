@@ -447,6 +447,7 @@ CREATE TABLE `withdrawals`  (
   `check_time` int(11) NULL DEFAULT 0 COMMENT '审核时间',
   `pay_time` int(11) NULL DEFAULT 0 COMMENT '支付时间',
   `refuse_time` int(11) NULL DEFAULT 0 COMMENT '拒绝时间',
+  `bank_type` int(10) DEFAULT NULL COMMENT '0:微信,1:支付宝,2:银行卡,3:paypal,4:Stripe',
   `bank_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '银行名称 如支付宝 微信 中国银行 农业银行等',
   `bank_card` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '银行账号或支付宝账号',
   `realname` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '提款账号真实姓名',
