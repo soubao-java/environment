@@ -198,6 +198,7 @@ CREATE TABLE `message_private`  (
   `message_content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '消息内容',
   `send_time` int(10) UNSIGNED NOT NULL COMMENT '发送时间',
   `send_user_id` mediumint(8) UNSIGNED NOT NULL COMMENT '发送者',
+  `send_role` int(10) NOT NULL COMMENT '发送者身份 0管理员，1商家，2 会员身份',
   PRIMARY KEY (`message_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
