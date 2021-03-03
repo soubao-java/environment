@@ -2,7 +2,7 @@ use bb2_mall;
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 120.24.42.191
+ Source Server         : 线上演示站
  Source Server Type    : MySQL
  Source Server Version : 50729
  Source Host           : 120.24.42.191:3306
@@ -12,7 +12,7 @@ use bb2_mall;
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 29/12/2020 18:05:59
+ Date: 03/03/2021 10:12:23
 */
 
 SET NAMES utf8mb4;
@@ -122,7 +122,7 @@ CREATE TABLE `brand`  (
   `store_id` int(10) NULL DEFAULT 0 COMMENT '商家ID',
   `status` tinyint(1) NULL DEFAULT 0 COMMENT '0正常 1审核中 2审核失败 审核状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for brand_type
@@ -166,7 +166,7 @@ CREATE TABLE `cart`  (
   INDEX `session_id`(`session_id`) USING BTREE,
   INDEX `goods_id`(`goods_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for combination
@@ -211,7 +211,7 @@ CREATE TABLE `config`  (
   `inc_type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `desc` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 134 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 142 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for coupon
@@ -239,7 +239,7 @@ CREATE TABLE `coupon`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `store_id`(`store_id`) USING BTREE,
   INDEX `use_end_time`(`use_end_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for coupon_list
@@ -264,7 +264,7 @@ CREATE TABLE `coupon_list`  (
   INDEX `store_id`(`store_id`) USING BTREE,
   INDEX `uid`(`uid`) USING BTREE,
   INDEX `order_id`(`order_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for coupon_price
@@ -274,7 +274,7 @@ CREATE TABLE `coupon_price`  (
   `coupon_price_id` smallint(4) NOT NULL AUTO_INCREMENT,
   `coupon_price_value` smallint(4) NOT NULL DEFAULT 0 COMMENT '优惠券面额',
   PRIMARY KEY (`coupon_price_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券面额表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠券面额表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for flash_sale
@@ -302,7 +302,7 @@ CREATE TABLE `flash_sale`  (
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for floor
@@ -321,7 +321,7 @@ CREATE TABLE `floor`  (
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
   PRIMARY KEY (`floor_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for floor_block
@@ -470,6 +470,7 @@ CREATE TABLE `goods`  (
   `virtual_refund` tinyint(1) NULL DEFAULT 1 COMMENT '是否允许过期退款， 1是，0否',
   `is_on_sale` tinyint(1) UNSIGNED NOT NULL DEFAULT 1 COMMENT '0下架1上架2违规下架',
   `is_free_shipping` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否包邮0否1是',
+  `is_cod` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否是到付件1是0否',
   `on_time` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品上架时间',
   `sort` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品排序',
   `is_recommend` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否推荐',
@@ -506,7 +507,7 @@ CREATE TABLE `goods`  (
   INDEX `exchange_integral`(`exchange_integral`) USING BTREE,
   INDEX `goods_name`(`goods_name`) USING BTREE,
   INDEX `store_id`(`store_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 254 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 260 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for goods_attr
@@ -575,7 +576,7 @@ CREATE TABLE `goods_category`  (
   `type_id` int(11) NULL DEFAULT 0 COMMENT '对应的类型id(商品模型ID)',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `parent_id`(`parent_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 185 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 187 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for goods_collect
@@ -590,7 +591,7 @@ CREATE TABLE `goods_collect`  (
   PRIMARY KEY (`collect_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   INDEX `goods_id`(`goods_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for goods_consult
@@ -634,7 +635,7 @@ CREATE TABLE `goods_images`  (
   `album_id` int(11) NULL DEFAULT NULL COMMENT '相册ID',
   PRIMARY KEY (`img_id`) USING BTREE,
   INDEX `goods_id`(`goods_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 876 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 880 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for goods_type
@@ -662,7 +663,7 @@ CREATE TABLE `goods_visit`  (
   INDEX `visit_id`(`visit_id`) USING BTREE,
   INDEX `goods_id`(`goods_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品浏览历史表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品浏览历史表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for group_buy
@@ -693,7 +694,7 @@ CREATE TABLE `group_buy`  (
   `gmt_create` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `gmt_modified` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '团购商品表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '团购商品表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for group_buy_goods_item
@@ -712,438 +713,397 @@ CREATE TABLE `group_buy_goods_item`  (
   `buy_num` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '购买数量',
   `order_num` int(11) NOT NULL DEFAULT 0 COMMENT '已下单人数',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '团购活动商品表' ROW_FORMAT = Fixed;
-
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '团购活动商品表' ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for h5_diy_base_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_base_menu`;
-CREATE TABLE `h5_diy_base_menu` (
+CREATE TABLE `h5_diy_base_menu`  (
   `base_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '底部菜单主键',
   `page_id` int(11) NOT NULL COMMENT '外键',
   `em_id` int(11) NOT NULL COMMENT '外键',
-  `word_color` varchar(255) NOT NULL COMMENT '字体颜色',
-  PRIMARY KEY (`base_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '底部菜单组件表' ROW_FORMAT = Dynamic;
-
-
+  `word_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字体颜色',
+  PRIMARY KEY (`base_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_base_menu_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_base_menu_detail`;
-CREATE TABLE `h5_diy_base_menu_detail` (
+CREATE TABLE `h5_diy_base_menu_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `base_id` int(11) NOT NULL COMMENT '底部菜单外键',
-  `not_img` varchar(255) NOT NULL COMMENT '未选中图片',
-  `yes_img` varchar(255) NOT NULL COMMENT '选中图片',
-  `navigation_name` varchar(255) NOT NULL COMMENT '导航名称',
-  `url` varchar(255) NOT NULL COMMENT '链接目标',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '底部菜单组件详情表' ROW_FORMAT = Dynamic;
-
+  `not_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '未选中图片',
+  `yes_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '选中图片',
+  `navigation_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '导航名称',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '链接目标',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_coupon
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_coupon`;
-CREATE TABLE `h5_diy_coupon` (
+CREATE TABLE `h5_diy_coupon`  (
   `cp_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '优惠卷组件id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `cp_style` int(11) NOT NULL COMMENT '样式1,2',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  PRIMARY KEY (`cp_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠卷组件表' ROW_FORMAT = Dynamic;
-
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`cp_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_coupon_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_coupon_detail`;
-CREATE TABLE `h5_diy_coupon_detail` (
+CREATE TABLE `h5_diy_coupon_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cp_id` int(11) NOT NULL COMMENT '自定义优惠卷外键',
   `coupon_id` int(11) NOT NULL COMMENT '优惠卷外键',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '优惠卷组件详情表' ROW_FORMAT = Dynamic;
-
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for h5_diy_element
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_element`;
-CREATE TABLE `h5_diy_element` (
+CREATE TABLE `h5_diy_element`  (
   `em_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '排序分类表',
   `page_id` int(11) NOT NULL COMMENT '页面id',
   `sort` int(255) NOT NULL COMMENT '1~n...',
   `module_type` int(255) NOT NULL COMMENT '主键类型',
   PRIMARY KEY (`em_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '排序分类表' ROW_FORMAT = Dynamic;
-
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for h5_diy_entrance
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_entrance`;
-CREATE TABLE `h5_diy_entrance` (
+CREATE TABLE `h5_diy_entrance`  (
   `entrance_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '快捷入口id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `style` int(255) NOT NULL COMMENT '样式选择，0：正方形 ，1：圆形',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  PRIMARY KEY (`entrance_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '快捷入口组件表' ROW_FORMAT = Dynamic;
-
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`entrance_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_entrance_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_entrance_detail`;
-CREATE TABLE `h5_diy_entrance_detail` (
+CREATE TABLE `h5_diy_entrance_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `entrance_id` int(11) NOT NULL COMMENT '入口外键',
-  `entrance_img` varchar(255) NOT NULL DEFAULT '' COMMENT '入口图片',
-  `entrance_name` varchar(255) NOT NULL COMMENT '入口名称',
-  `entrance_url` varchar(255) NOT NULL DEFAULT '' COMMENT '入口地址',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '快捷入口组件详情表' ROW_FORMAT = Dynamic;
-
+  `entrance_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '入口图片',
+  `entrance_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '入口名称',
+  `entrance_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '入口地址',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_goods`;
-CREATE TABLE `h5_diy_goods` (
+CREATE TABLE `h5_diy_goods`  (
   `list_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品列表主键',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `layout` int(255) NOT NULL COMMENT '0,默认，1:橱窗式,2:列表式,3:海报式',
   `goods_count` int(255) NOT NULL COMMENT '商品数量',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
   `is_show_name` int(255) NOT NULL COMMENT '列表名称是否显示 0默认显示，1隐藏',
   `activity_type` int(255) NOT NULL COMMENT '活动类型 0抢购,1团购，2优惠促销,3预售,4虚拟,5拼团,6。。。',
   `sort_type` int(255) NOT NULL COMMENT '排序方式',
-  PRIMARY KEY (`list_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品列表组件表' ROW_FORMAT = Dynamic;
-
+  PRIMARY KEY (`list_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_goods_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_goods_detail`;
-CREATE TABLE `h5_diy_goods_detail` (
+CREATE TABLE `h5_diy_goods_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `list_id` int(11) NOT NULL COMMENT '商品列表外键',
-  `list_name` varchar(255) NOT NULL COMMENT '列表名称',
+  `list_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '列表名称',
   `conditions` int(255) NOT NULL COMMENT '0：按条件选取 1手动',
-  `goods_ids` varchar(255) NOT NULL COMMENT '多个商品',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '商品列表组件详情表' ROW_FORMAT = Dynamic;
-
-
+  `goods_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '多个商品',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_img
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_img`;
-CREATE TABLE `h5_diy_img` (
+CREATE TABLE `h5_diy_img`  (
   `img_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '图片主键id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `width` varchar(255) NOT NULL COMMENT '宽度',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  `img` varchar(255) NOT NULL COMMENT '图片地址',
-  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '链接地址',
-  PRIMARY KEY (`img_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '图片组件表' ROW_FORMAT = Dynamic;
-
-
+  `width` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '宽度',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片地址',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '链接地址',
+  PRIMARY KEY (`img_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_img_word
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_img_word`;
-CREATE TABLE `h5_diy_img_word` (
+CREATE TABLE `h5_diy_img_word`  (
   `img_word_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自定义图文主键',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `arrange_type` int(255) NOT NULL COMMENT '排列样式,0:左图右文,1:左文右图,2:上下单图,3:上下双图,4:上下三图,',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  `title` varchar(255) NOT NULL COMMENT '标题',
-  `intro` varchar(255) NOT NULL COMMENT '简介',
-  `url` varchar(255) NOT NULL COMMENT '链接地址',
-  PRIMARY KEY (`img_word_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '自定义图文组件表' ROW_FORMAT = Dynamic;
-
-
-
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标题',
+  `intro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '简介',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '链接地址',
+  PRIMARY KEY (`img_word_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_img_word_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_img_word_detail`;
-CREATE TABLE `h5_diy_img_word_detail` (
+CREATE TABLE `h5_diy_img_word_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `img_word_id` int(11) NOT NULL COMMENT '自定义图文外键',
-  `img` varchar(255) NOT NULL COMMENT '图片地址',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '自定义图文组件详情表' ROW_FORMAT = Dynamic;
-
-
+  `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片地址',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_loop_ad
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_loop_ad`;
-CREATE TABLE `h5_diy_loop_ad` (
+CREATE TABLE `h5_diy_loop_ad`  (
   `loop_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '轮播广告id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `loop_interval` varchar(255) NOT NULL COMMENT '轮播间隔',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `loop_interval` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '轮播间隔',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
   PRIMARY KEY (`loop_id`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播广告组件表' ROW_FORMAT = Dynamic;
-
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_loop_ad_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_loop_ad_detail`;
-CREATE TABLE `h5_diy_loop_ad_detail` (
+CREATE TABLE `h5_diy_loop_ad_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `loop_id` int(11) NOT NULL COMMENT '自定义轮播外键',
-  `img` varchar(255) NOT NULL DEFAULT '' COMMENT '图片',
-  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '跳转路径',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播广告组件详情表' ROW_FORMAT = Dynamic;
-
+  `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '图片',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '跳转路径',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_loop_goods
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_loop_goods`;
-CREATE TABLE `h5_diy_loop_goods` (
+CREATE TABLE `h5_diy_loop_goods`  (
   `loop_goods_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '轮播图片',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `goods_count` int(255) NOT NULL COMMENT '商品数量',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
   `is_show_title` int(255) NOT NULL COMMENT '是否显示列表名称 0：显示',
   `goods_sort` int(255) NOT NULL COMMENT '商品显示排序',
-  `title_name` varchar(255) DEFAULT NULL COMMENT '列表名称',
-  PRIMARY KEY (`loop_goods_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播图片组件表' ROW_FORMAT = Dynamic;
-
+  `title_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列表名称',
+  PRIMARY KEY (`loop_goods_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_loop_goods_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_loop_goods_detail`;
-CREATE TABLE `h5_diy_loop_goods_detail` (
+CREATE TABLE `h5_diy_loop_goods_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `loop_goods_id` int(11) NOT NULL COMMENT '轮播商品外键',
   `goods_id` int(11) NOT NULL COMMENT '商品id',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '轮播图片组件详情表' ROW_FORMAT = Dynamic;
-
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for h5_diy_marketing
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_marketing`;
-CREATE TABLE `h5_diy_marketing` (
+CREATE TABLE `h5_diy_marketing`  (
   `marketing_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '营销id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `marketing_type` varchar(255) NOT NULL COMMENT '活动0拼团，1秒杀',
+  `marketing_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '活动0拼团，1秒杀',
   `is_show_name` int(255) NOT NULL COMMENT '0使用列表名称 1不使用列表名称',
   `layout` int(255) NOT NULL COMMENT '0橱窗 ,1列表',
-  `activity_title` varchar(255) DEFAULT NULL COMMENT '活动标题',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  PRIMARY KEY (`marketing_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '营销组件表' ROW_FORMAT = Dynamic;
-
+  `activity_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '活动标题',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`marketing_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_news
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_news`;
-CREATE TABLE `h5_diy_news` (
+CREATE TABLE `h5_diy_news`  (
   `news_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '新闻',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `below_space` varchar(255) NOT NULL DEFAULT '' COMMENT '下间距',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '下间距',
   `news_count` int(11) NOT NULL COMMENT '新闻个数',
-  `news_title` varchar(255) NOT NULL DEFAULT '' COMMENT '新闻主题',
-  PRIMARY KEY (`news_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '新闻组件表' ROW_FORMAT = Dynamic;
+  `news_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '新闻主题',
+  PRIMARY KEY (`news_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_news_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_news_detail`;
-CREATE TABLE `h5_diy_news_detail` (
+CREATE TABLE `h5_diy_news_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `news_id` int(11) NOT NULL COMMENT '自定义新闻外键',
   `article_id` int(11) NOT NULL COMMENT '选中新闻外键',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '新闻组件详情表' ROW_FORMAT = Dynamic;
-
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for h5_diy_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_notice`;
-CREATE TABLE `h5_diy_notice` (
+CREATE TABLE `h5_diy_notice`  (
   `notice_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '滚动公告主键',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `notice_img` varchar(255) NOT NULL COMMENT '公告图片',
-  `back_color` varchar(255) DEFAULT NULL COMMENT '背景颜色',
-  `word_color` varchar(255) NOT NULL COMMENT '字体颜色',
-  `word_sizi` varchar(255) NOT NULL COMMENT '字体大小',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  PRIMARY KEY (`notice_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '滚动公告组件表' ROW_FORMAT = Dynamic;
-
+  `notice_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告图片',
+  `back_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '背景颜色',
+  `word_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字体颜色',
+  `word_sizi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字体大小',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`notice_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_notice_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_notice_detail`;
-CREATE TABLE `h5_diy_notice_detail` (
+CREATE TABLE `h5_diy_notice_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '滚动公告主键数据外表',
   `notice_id` int(11) NOT NULL COMMENT '公告外键',
-  `url` varchar(255) NOT NULL COMMENT '链接位置',
-  `content` varchar(255) NOT NULL COMMENT '公告内容',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '滚动公告组件详情表' ROW_FORMAT = Dynamic;
-
-
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '链接位置',
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告内容',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_page
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_page`;
-CREATE TABLE `h5_diy_page` (
+CREATE TABLE `h5_diy_page`  (
   `page_id` int(11) NOT NULL AUTO_INCREMENT,
-  `page_name` varchar(255) NOT NULL,
-  `is_show` int(255) NOT NULL DEFAULT '0' COMMENT '0：不显示，1：显示',
-  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-  PRIMARY KEY (`page_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '页面表' ROW_FORMAT = Dynamic;
-
-
-
+  `page_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `is_show` int(255) NOT NULL DEFAULT 0 COMMENT '0：不显示，1：显示',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
+  PRIMARY KEY (`page_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_rich_text
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_rich_text`;
-CREATE TABLE `h5_diy_rich_text` (
+CREATE TABLE `h5_diy_rich_text`  (
   `rich_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '富文本组件id',
   `page_id` int(11) NOT NULL,
   `em_id` int(11) NOT NULL,
-  `back_color` varchar(255) NOT NULL,
-  `below_space` varchar(255) NOT NULL,
-  `content` varchar(255) NOT NULL,
-  PRIMARY KEY (`rich_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '富文本组件' ROW_FORMAT = Dynamic;
+  `back_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`rich_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_search
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_search`;
-CREATE TABLE `h5_diy_search` (
+CREATE TABLE `h5_diy_search`  (
   `search_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '搜索框',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
-  `em_id` int(11) NOT NULL DEFAULT '0' COMMENT '排序默认为0',
+  `em_id` int(11) NOT NULL DEFAULT 0 COMMENT '排序默认为0',
   `type` int(255) NOT NULL COMMENT '显示样式',
-  PRIMARY KEY (`search_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '搜索框组件表' ROW_FORMAT = Dynamic;
-
+  PRIMARY KEY (`search_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for h5_diy_shop
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_shop`;
-CREATE TABLE `h5_diy_shop` (
+CREATE TABLE `h5_diy_shop`  (
   `shops_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '多店铺主键',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `seek_radii` varchar(255) NOT NULL COMMENT '搜索半径',
-  `top_word` varchar(255) NOT NULL COMMENT '顶部文字',
-  PRIMARY KEY (`shops_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '多店铺组件表' ROW_FORMAT = Dynamic;
-
-
-
+  `seek_radii` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '搜索半径',
+  `top_word` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '顶部文字',
+  PRIMARY KEY (`shops_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_text
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_text`;
-CREATE TABLE `h5_diy_text` (
+CREATE TABLE `h5_diy_text`  (
   `text_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '文本导航主键',
   `page_id` int(11) NOT NULL COMMENT '页面id',
   `em_id` int(11) NOT NULL COMMENT '排序id',
   `text_site` int(255) NOT NULL COMMENT '左 0 ，中1，右 2',
-  `back_color` varchar(255) NOT NULL DEFAULT '' COMMENT '背景颜色',
-  `word_color` varchar(255) NOT NULL DEFAULT '' COMMENT '字体颜色',
-  `below_space` varchar(255) NOT NULL DEFAULT '' COMMENT '下间距',
-  `word_sizi` varchar(255) NOT NULL COMMENT '字体大小',
-  `title` varchar(255) NOT NULL DEFAULT '' COMMENT '文本标签',
-  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '路径',
-  PRIMARY KEY (`text_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '文本导航主键组件表' ROW_FORMAT = Dynamic;
-
+  `back_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '背景颜色',
+  `word_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '字体颜色',
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '下间距',
+  `word_sizi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字体大小',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '文本标签',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '路径',
+  PRIMARY KEY (`text_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_video
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_video`;
-CREATE TABLE `h5_diy_video` (
+CREATE TABLE `h5_diy_video`  (
   `video_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自定义视频主键',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  `video_url` varchar(255) NOT NULL DEFAULT '' COMMENT '视频url',
-  `video_img` varchar(255) NOT NULL COMMENT '视频封面',
-  PRIMARY KEY (`video_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '自定义视频组件表' ROW_FORMAT = Dynamic;
-
-
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `video_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '视频url',
+  `video_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '视频封面',
+  PRIMARY KEY (`video_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_window
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_window`;
-CREATE TABLE `h5_diy_window` (
+CREATE TABLE `h5_diy_window`  (
   `window_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '橱窗id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `window_type` int(255) NOT NULL COMMENT '橱窗样式',
-  `below_space` varchar(255) NOT NULL COMMENT '下间距',
-  PRIMARY KEY (`window_id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '橱窗组件表' ROW_FORMAT = Dynamic;
-
-
+  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  PRIMARY KEY (`window_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for h5_diy_window_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `h5_diy_window_detail`;
-CREATE TABLE `h5_diy_window_detail` (
+CREATE TABLE `h5_diy_window_detail`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `window_id` int(11) NOT NULL COMMENT '橱窗外键',
-  `window_img` varchar(255) NOT NULL COMMENT '橱窗图片',
-  `window_url` varchar(255) NOT NULL COMMENT '橱窗地址',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '橱窗组件详情表' ROW_FORMAT = Dynamic;
-
+  `window_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '橱窗图片',
+  `window_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '橱窗地址',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for help
@@ -1187,7 +1147,7 @@ CREATE TABLE `inventory`  (
   `inventory_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '商品清单名称',
   PRIMARY KEY (`inventory_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品清单' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品清单' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for inventory_goods
@@ -1198,7 +1158,7 @@ CREATE TABLE `inventory_goods`  (
   `goods_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品id',
   `inventory_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品清单id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品与清单中间表' ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商品与清单中间表' ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for menu_cfg
@@ -1208,26 +1168,26 @@ CREATE TABLE `menu_cfg`  (
   `menu_id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT,
   `menu_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '自定义名称',
   `default_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '默认名称',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '移动端链接',
+  `image_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '移动端图片',
   `is_show` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否显示',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for navigation
 -- ----------------------------
 DROP TABLE IF EXISTS `navigation`;
-CREATE TABLE `navigation` (
+CREATE TABLE `navigation`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '导航主键',
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '导航名称',
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '导航名称',
   `is_show` int(10) NOT NULL COMMENT '是否显示:1显示，2不显示',
   `is_new` int(10) NOT NULL COMMENT '是否新窗口：1是，2否',
-  `url` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '跳转路径',
+  `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '跳转路径',
   `position` int(255) NOT NULL COMMENT '位置:1前台顶部，2前台底部，3商家底部',
   `affiliation` int(10) NOT NULL COMMENT '归属：0pc，1h5',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for news
@@ -1262,7 +1222,7 @@ CREATE TABLE `news`  (
   `source` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '新闻来源 、0=总平台 1=商家 2=用户',
   PRIMARY KEY (`article_id`) USING BTREE,
   INDEX `cat_id`(`cat_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for news_cat
@@ -1368,7 +1328,7 @@ CREATE TABLE `pre_sell`  (
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`pre_sell_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for prom_goods
@@ -1416,7 +1376,7 @@ CREATE TABLE `prom_order`  (
   `recommend` tinyint(4) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否推荐',
   `is_deleted` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否删除1为是,0为否',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for region
@@ -1441,9 +1401,9 @@ CREATE TABLE `seo`  (
   `title` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标题',
   `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '关键词',
   `description` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '描述',
-  `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '类型',
+  `type` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '类型',
   UNIQUE INDEX `id`(`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'SEO信息存放表' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'SEO信息存放表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for spec
@@ -1514,7 +1474,7 @@ CREATE TABLE `spec_item`  (
   INDEX `spec_id`(`spec_id`) USING BTREE,
   INDEX `item`(`item`) USING BTREE,
   INDEX `store_id`(`store_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 246 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 252 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for spec_type
@@ -1540,7 +1500,7 @@ CREATE TABLE `stock_log`  (
   `stock` int(11) NULL DEFAULT NULL COMMENT '更改库存',
   `ctime` int(11) NULL DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2122 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2204 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for system_article
@@ -1586,7 +1546,7 @@ CREATE TABLE `team_activity`  (
   `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '软删除',
   `item_id` int(10) NULL DEFAULT 0 COMMENT '商品规格id',
   PRIMARY KEY (`team_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '拼团活动表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '拼团活动表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for team_follow
@@ -1663,6 +1623,222 @@ CREATE TABLE `team_lottery`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for trend
+-- ----------------------------
+DROP TABLE IF EXISTS `trend`;
+CREATE TABLE `trend`  (
+  `trend_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `author_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '发布人昵称',
+  `author_head_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '发布人头像',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '标题',
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '描述',
+  `image` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '动态展示图',
+  `praise_num` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '点赞数',
+  `comment_num` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '评论数',
+  `share_num` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '转发数',
+  `longitude` decimal(10, 7) NOT NULL DEFAULT 0.0000000 COMMENT '经度',
+  `latitude` decimal(10, 7) NOT NULL DEFAULT 0.0000000 COMMENT '纬度',
+  `is_auth` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '总平台审核',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  `deleted` tinyint(1) NOT NULL DEFAULT 0 COMMENT '逻辑删除',
+  `is_recommend` tinyint(1) NOT NULL DEFAULT 0 COMMENT '0不推荐1推荐',
+  `video` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`trend_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trend_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_comment`;
+CREATE TABLE `trend_comment`  (
+  `trend_comment_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态评论id',
+  `trend_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '动态id',
+  `user_id` int(10) NOT NULL COMMENT '评论人id',
+  `user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '评论人昵称',
+  `user_head_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '评论人头像',
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  `praise_num` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '点赞数',
+  `is_auth` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否通过审核',
+  `deleted` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '逻辑删',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  PRIMARY KEY (`trend_comment_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trend_comment_praise
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_comment_praise`;
+CREATE TABLE `trend_comment_praise`  (
+  `trend_comment_praise_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户id',
+  `trend_comment_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '动态评论id',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`trend_comment_praise_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_comment_reply
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_comment_reply`;
+CREATE TABLE `trend_comment_reply`  (
+  `trend_comment_reply_id` int(10) NOT NULL AUTO_INCREMENT,
+  `comment_id` int(10) NOT NULL DEFAULT 0,
+  `reply_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '回复目标id',
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '内容',
+  `from_user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '回复用户id',
+  `from_user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '回复用户昵称',
+  `from_user_head_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '回复用户头像',
+  `to_user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '目标用户的id',
+  `to_user_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '目标用户的昵称',
+  `to_user_head_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '目标用户的头像',
+  `is_auth` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否通过审核',
+  `deleled` tinyint(255) UNSIGNED NOT NULL DEFAULT 0 COMMENT '逻辑删',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+  PRIMARY KEY (`trend_comment_reply_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trend_comment_reply_praise
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_comment_reply_praise`;
+CREATE TABLE `trend_comment_reply_praise`  (
+  `trend_comment_reply_praise_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态回复点赞id',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户id',
+  `trend_comment_reply_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '动态回复id',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`trend_comment_reply_praise_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_goods`;
+CREATE TABLE `trend_goods`  (
+  `trend_goods_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态关联商品主键',
+  `trend_id` int(10) NOT NULL COMMENT '动态表id',
+  `goods_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '商品id,从订单商品表的商品id过来的',
+  `store_id` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`trend_goods_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_image
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_image`;
+CREATE TABLE `trend_image`  (
+  `trend_image_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态图片关系id',
+  `trend_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '动态id',
+  `image_url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '动态图片url',
+  `weight` int(2) UNSIGNED NOT NULL DEFAULT 0 COMMENT '同一个动态里的排序权重',
+  PRIMARY KEY (`trend_image_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trend_image_label
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_image_label`;
+CREATE TABLE `trend_image_label`  (
+  `trend_image_label_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态图片标签id',
+  `trend_image_id` int(10) NOT NULL DEFAULT 0 COMMENT '动态图片id',
+  `trend_label_id` int(10) NOT NULL DEFAULT 0 COMMENT '动态标签id',
+  `x_axis` decimal(4, 2) UNSIGNED NULL DEFAULT 0.00 COMMENT 'x轴',
+  `y_axis` decimal(4, 2) UNSIGNED NULL DEFAULT 0.00 COMMENT 'y轴',
+  PRIMARY KEY (`trend_image_label_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_label
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_label`;
+CREATE TABLE `trend_label`  (
+  `trend_label_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '标签主键',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '标签内容',
+  PRIMARY KEY (`trend_label_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trend_praise
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_praise`;
+CREATE TABLE `trend_praise`  (
+  `trend_praise_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态点赞',
+  `user_id` int(10) NOT NULL DEFAULT 0 COMMENT '点赞人',
+  `trend_id` int(10) NOT NULL DEFAULT 0 COMMENT '动态id',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT ' 创建时间',
+  PRIMARY KEY (`trend_praise_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_store
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_store`;
+CREATE TABLE `trend_store`  (
+  `trend_store_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '店铺动态id',
+  `trend_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '动态id',
+  `store_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '店铺id',
+  PRIMARY KEY (`trend_store_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_type
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_type`;
+CREATE TABLE `trend_type`  (
+  `trend_type_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态类型id',
+  `trend_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '动态类型名称',
+  PRIMARY KEY (`trend_type_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for trend_type_relation
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_type_relation`;
+CREATE TABLE `trend_type_relation`  (
+  `relation_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '关系id',
+  `type_id` int(10) NOT NULL DEFAULT 0 COMMENT '发布类型id',
+  `trend_id` int(10) NOT NULL DEFAULT 0 COMMENT '动态id',
+  PRIMARY KEY (`relation_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_user
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_user`;
+CREATE TABLE `trend_user`  (
+  `trend_user_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户id',
+  `trend_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '动态id',
+  PRIMARY KEY (`trend_user_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_user_focus
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_user_focus`;
+CREATE TABLE `trend_user_focus`  (
+  `trend_user_focus_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '动态关注id',
+  `user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '用户id',
+  `focus_user_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '被关注的用户id',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`trend_user_focus_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for trend_user_label
+-- ----------------------------
+DROP TABLE IF EXISTS `trend_user_label`;
+CREATE TABLE `trend_user_label`  (
+  `trend_user_label_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户历史标签主键',
+  `user_id` int(10) NOT NULL DEFAULT 0 COMMENT '用户id',
+  `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '历史标签内容',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`trend_user_label_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for trial_apply
 -- ----------------------------
 DROP TABLE IF EXISTS `trial_apply`;
@@ -1698,7 +1874,7 @@ CREATE TABLE `trial_goods`  (
   `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
   `state` int(11) NOT NULL COMMENT '0未开始，1已开始，2已结束',
   PRIMARY KEY (`trial_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '试用商品' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '试用商品' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for trial_poster
@@ -1751,7 +1927,7 @@ CREATE TABLE `undo_log`  (
   `log_modified` datetime(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `ux_undo_log`(`xid`, `branch_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user_distribution
@@ -1773,6 +1949,36 @@ CREATE TABLE `user_distribution`  (
   INDEX `goods_id`(`goods_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 348 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户选择分销商品表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for website_history_data
+-- ----------------------------
+DROP TABLE IF EXISTS `website_history_data`;
+CREATE TABLE `website_history_data`  (
+  `history_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '历史数据统计',
+  `visit_count` int(10) NOT NULL DEFAULT 0 COMMENT '访客数',
+  `view_count` int(10) NOT NULL DEFAULT 0 COMMENT '浏览量',
+  `bounce_rate` decimal(5, 3) NOT NULL DEFAULT 0.000 COMMENT '跳出率',
+  `view_average_time` time(0) NOT NULL DEFAULT '00:00:00' COMMENT '平均访问时长',
+  `order_count` int(10) NOT NULL DEFAULT 0 COMMENT '支付订单数',
+  `order_amount` decimal(10, 2) NOT NULL DEFAULT 0.00 COMMENT '销售额',
+  `order_rate` decimal(5, 3) NOT NULL DEFAULT 0.000 COMMENT '下单/支付',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`history_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '每日网站数据统计' ROW_FORMAT = Fixed;
+
+-- ----------------------------
+-- Table structure for website_visit_log
+-- ----------------------------
+DROP TABLE IF EXISTS `website_visit_log`;
+CREATE TABLE `website_visit_log`  (
+  `log_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '访客日志',
+  `ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '访客ip',
+  `category` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '通常是用户与之互动的对象（例如 \'video\'）',
+  `action` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '互动类型（例如 \'play\'）',
+  `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`log_id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 183 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '商城访客事件日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for wx_material

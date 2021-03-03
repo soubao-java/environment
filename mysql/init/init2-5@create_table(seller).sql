@@ -2,7 +2,7 @@ use bb2_seller;
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 120.24.42.191
+ Source Server         : 线上演示站
  Source Server Type    : MySQL
  Source Server Version : 50729
  Source Host           : 120.24.42.191:3306
@@ -12,7 +12,7 @@ use bb2_seller;
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 29/12/2020 18:09:17
+ Date: 03/03/2021 10:18:30
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `account_log_store`  (
   `order_id` int(10) NULL DEFAULT NULL COMMENT '订单id',
   PRIMARY KEY (`log_id`) USING BTREE,
   INDEX `user_id`(`store_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Table structure for guarantee
@@ -51,7 +51,7 @@ CREATE TABLE `guarantee`  (
   `auditstate` tinyint(1) NOT NULL DEFAULT 0 COMMENT '申请审核状态0未审核1审核通过2审核失败3已支付保证金4保证金审核通过5保证金审核失败',
   `quitstate` tinyint(1) NOT NULL DEFAULT 0 COMMENT '退出申请状态0未申请 1已申请 2申请失败',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺消费者保障服务加入情况表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺消费者保障服务加入情况表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for guarantee_apply
@@ -68,7 +68,7 @@ CREATE TABLE `guarantee_apply`  (
   `costimg` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '保证金付款凭证图片',
   `apply_type` tinyint(1) NULL DEFAULT 1 COMMENT '申请类型0退出1加入',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '消费者保障服务申请表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '消费者保障服务申请表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for guarantee_costlog
@@ -124,7 +124,7 @@ CREATE TABLE `guarantee_log`  (
   `log_userid` int(11) NOT NULL COMMENT '操作者ID',
   `log_username` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作者名称',
   PRIMARY KEY (`log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺消费者保障服务日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺消费者保障服务日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for pc_index_template
@@ -154,7 +154,7 @@ CREATE TABLE `seller`  (
   `token` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用于app 授权类似于session_id',
   `open_teach` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '是否显示新手向导',
   PRIMARY KEY (`seller_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 53 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '卖家用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '卖家用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for seller_log
@@ -274,7 +274,7 @@ CREATE TABLE `store`  (
   INDEX `store_name`(`store_name`) USING BTREE,
   INDEX `sc_id`(`sc_id`) USING BTREE,
   INDEX `store_state`(`store_state`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺数据表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺数据表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for store_address
@@ -369,7 +369,7 @@ CREATE TABLE `store_apply`  (
   `add_time` int(11) NULL DEFAULT 0 COMMENT '提交申请时间',
   `apply_type` tinyint(1) NULL DEFAULT 0 COMMENT '申请类型默认0企业1个人',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for store_bind_class
@@ -385,7 +385,7 @@ CREATE TABLE `store_bind_class`  (
   `state` tinyint(3) UNSIGNED NOT NULL DEFAULT 0 COMMENT '状态0审核中1审核通过 2审核失败',
   PRIMARY KEY (`bid`) USING BTREE,
   INDEX `store_id`(`store_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 197 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺可发布商品类目表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 224 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺可发布商品类目表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for store_class
@@ -397,7 +397,7 @@ CREATE TABLE `store_class`  (
   `sc_bail` mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '保证金数额',
   `sc_sort` tinyint(1) UNSIGNED NOT NULL DEFAULT 0 COMMENT '排序',
   PRIMARY KEY (`sc_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for store_distribut
@@ -447,7 +447,7 @@ CREATE TABLE `store_goods_class`  (
   PRIMARY KEY (`cat_id`) USING BTREE,
   INDEX `stc_parent_id`(`parent_id`, `cat_sort`) USING BTREE,
   INDEX `store_id`(`store_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺商品分类表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '店铺商品分类表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for store_grade
@@ -614,5 +614,16 @@ CREATE TABLE `suppliers`  (
   `store_id` int(10) NULL DEFAULT 0 COMMENT '所属商家id',
   PRIMARY KEY (`suppliers_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tidio
+-- ----------------------------
+DROP TABLE IF EXISTS `tidio`;
+CREATE TABLE `tidio`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `store_id` int(10) NOT NULL DEFAULT 0,
+  `js_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

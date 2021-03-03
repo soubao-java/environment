@@ -2,7 +2,7 @@ use bb2_user;
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 120.24.42.191
+ Source Server         : 线上演示站
  Source Server Type    : MySQL
  Source Server Version : 50729
  Source Host           : 120.24.42.191:3306
@@ -12,7 +12,7 @@ use bb2_user;
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 29/12/2020 18:10:56
+ Date: 03/03/2021 10:19:51
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `account_log`  (
   `order_id` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单id',
   PRIMARY KEY (`log_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for email_goods
@@ -63,7 +63,7 @@ CREATE TABLE `email_log`  (
   `status` int(1) NOT NULL DEFAULT 0 COMMENT '1:发送成功,0:发送失败,',
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '发送时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '发送邮件表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci COMMENT = '发送邮件表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for email_receive
@@ -77,7 +77,7 @@ CREATE TABLE `email_receive`  (
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `email_log_id` int(11) NOT NULL COMMENT '邮件表id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '邮件接受表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '邮件接受表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for invoice
@@ -152,7 +152,7 @@ CREATE TABLE `message_activity`  (
   `prom_id` int(11) NOT NULL DEFAULT 0 COMMENT '活动id',
   `store_id` int(11) NOT NULL DEFAULT 0 COMMENT '店铺ID',
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for message_logistics
@@ -170,7 +170,7 @@ CREATE TABLE `message_logistics`  (
   `type` tinyint(1) UNSIGNED NULL DEFAULT 0 COMMENT '1到货通知2发货提醒3签收提醒4评价提醒5退货提醒6退款提醒',
   `store_id` int(11) NOT NULL DEFAULT 0 COMMENT '店铺ID',
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for message_notice
@@ -187,7 +187,7 @@ CREATE TABLE `message_notice`  (
   `prom_id` int(11) NOT NULL DEFAULT 0 COMMENT '活动id',
   `store_id` int(11) NULL DEFAULT 0 COMMENT '店铺ID',
   PRIMARY KEY (`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 245 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 491 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for message_private
@@ -214,7 +214,7 @@ CREATE TABLE `oauth_users`  (
   `unionid` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `oauth_child` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'mp标识来自公众号, open标识来自开放平台,用于标识来自哪个第三方授权平台, 因为同是微信平台有来自公众号和开放平台',
   PRIMARY KEY (`tu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sms_log
@@ -260,7 +260,7 @@ CREATE TABLE `store_collect`  (
   `store_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `user_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收藏会员名称',
   PRIMARY KEY (`log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 75 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for undo_log
@@ -329,7 +329,7 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`user_id`) USING BTREE,
   INDEX `email`(`email`) USING BTREE,
   INDEX `mobile`(`mobile_validated`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 279 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 285 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user_address
@@ -353,7 +353,7 @@ CREATE TABLE `user_address`  (
   `latitude` decimal(10, 7) NOT NULL DEFAULT 0.0000000 COMMENT '地址纬度',
   PRIMARY KEY (`address_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 140 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 143 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user_extend
@@ -400,7 +400,7 @@ CREATE TABLE `user_message`  (
   PRIMARY KEY (`rec_id`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
   INDEX `message_id`(`message_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 245 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 493 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user_sign
@@ -443,17 +443,17 @@ DROP TABLE IF EXISTS `withdrawals`;
 CREATE TABLE `withdrawals`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '提现申请表',
   `user_id` int(11) NULL DEFAULT 0 COMMENT '用户id',
-  `money` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '提现金额',
+  `money` decimal(10, 2) NULL DEFAULT NULL COMMENT '提现金额',
   `create_time` int(11) NULL DEFAULT 0 COMMENT '申请时间',
   `check_time` int(11) NULL DEFAULT 0 COMMENT '审核时间',
   `pay_time` int(11) NULL DEFAULT 0 COMMENT '支付时间',
   `refuse_time` int(11) NULL DEFAULT 0 COMMENT '拒绝时间',
-  `bank_type` int(10) DEFAULT NULL COMMENT '0:微信,1:支付宝,2:银行卡,3:paypal,4:Stripe',
+  `bank_type` int(10) NULL DEFAULT NULL COMMENT '0:微信,1:支付宝,2:银行卡,3:paypal,4:Stripe',
   `bank_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '银行名称 如支付宝 微信 中国银行 农业银行等',
   `bank_card` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '银行账号或支付宝账号',
   `realname` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '提款账号真实姓名',
   `remark` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT '' COMMENT '提现备注',
-  `taxfee` decimal(10, 2) NULL DEFAULT 0.00 COMMENT '税收手续费',
+  `taxfee` decimal(10, 2) NULL DEFAULT NULL COMMENT '税收手续费',
   `status` tinyint(1) NULL DEFAULT 0 COMMENT '状态：-2删除作废-1审核失败0申请中1审核通过2付款成功3付款失败',
   `pay_code` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '付款对账流水号',
   `error_code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '付款失败错误代码',

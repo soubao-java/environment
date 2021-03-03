@@ -3,7 +3,7 @@ use bb2_admin;
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 120.24.42.191
+ Source Server         : 线上演示站
  Source Server Type    : MySQL
  Source Server Version : 50729
  Source Host           : 120.24.42.191:3306
@@ -13,7 +13,7 @@ use bb2_admin;
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 29/12/2020 17:38:48
+ Date: 03/03/2021 10:09:41
 */
 
 SET NAMES utf8mb4;
@@ -41,7 +41,18 @@ CREATE TABLE `admin`  (
   PRIMARY KEY (`admin_id`) USING BTREE,
   INDEX `user_name`(`user_name`) USING BTREE,
   INDEX `agency_id`(`paypwd`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for admin_role
+-- ----------------------------
+DROP TABLE IF EXISTS `admin_role`;
+CREATE TABLE `admin_role`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
+  `admin_id` int(10) NOT NULL DEFAULT 0 COMMENT '管理员id',
+  `role_id` int(10) NOT NULL DEFAULT 0 COMMENT '角色id',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Table structure for expense_log
@@ -58,7 +69,7 @@ CREATE TABLE `expense_log`  (
   `user_id` int(10) NULL DEFAULT 0 COMMENT '涉及会员id',
   `store_id` int(10) NULL DEFAULT 0 COMMENT '涉及商家id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci COMMENT = '平台支出金额或赠送积分记录日志';
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci COMMENT = '平台支出金额或赠送积分记录日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for jobs_info
@@ -81,7 +92,7 @@ CREATE TABLE `jobs_info`  (
   `update_time` bigint(20) NULL DEFAULT NULL COMMENT '更新时间',
   `create_time` bigint(20) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务信息';
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for jobs_lock
@@ -94,7 +105,7 @@ CREATE TABLE `jobs_lock`  (
   `create_time` bigint(20) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uidx_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 533756 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务锁';
+) ENGINE = InnoDB AUTO_INCREMENT = 6030090 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务锁' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for jobs_log
@@ -112,7 +123,7 @@ CREATE TABLE `jobs_log`  (
   `trigger_msg` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '触发器调度返回信息',
   `create_time` bigint(20) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务调度日志';
+) ENGINE = InnoDB AUTO_INCREMENT = 135084 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务调度日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for jobs_registry
@@ -125,7 +136,7 @@ CREATE TABLE `jobs_registry`  (
   `status` tinyint(2) NOT NULL DEFAULT 0 COMMENT '0、启用 1、已禁用',
   `update_time` bigint(20) NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务注册信息';
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '任务注册信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for log
@@ -140,18 +151,7 @@ CREATE TABLE `log`  (
   `log_time` int(10) NULL DEFAULT NULL,
   `log_type` tinyint(2) NULL DEFAULT 0 COMMENT '0默认1操作店铺2审核活动3处理投诉4其他',
   PRIMARY KEY (`log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci;
-
--- ----------------------------
--- Table structure for admin_role
--- ----------------------------
-DROP TABLE IF EXISTS `admin_role`;
-CREATE TABLE `admin_role`  (
-  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `admin_id` int(10) NOT NULL DEFAULT 0 COMMENT '管理员id',
-  `role_id` int(10) NOT NULL DEFAULT 0 COMMENT '角色id',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色表' ROW_FORMAT = Fixed;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for menu
@@ -165,11 +165,11 @@ CREATE TABLE `menu`  (
   `sort` int(10) NOT NULL DEFAULT 1 COMMENT '排序',
   `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '前端跳转url',
   `icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '前端icon',
-  `is_navigation` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否是导航，0不是,1是',
+  `is_navigation` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否是导航，0不是,1是',
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 17 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 1689 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for role
@@ -182,7 +182,7 @@ CREATE TABLE `role`  (
   `gmt_create` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `gmt_modified` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for role_menu
@@ -193,6 +193,6 @@ CREATE TABLE `role_menu`  (
   `role_id` int(10) NOT NULL DEFAULT 0 COMMENT '\r\n角色id',
   `menu_id` int(10) NOT NULL DEFAULT 0 COMMENT '菜单id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Fixed;
 
 SET FOREIGN_KEY_CHECKS = 1;
