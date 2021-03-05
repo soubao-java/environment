@@ -117,6 +117,7 @@ CREATE TABLE `member_msg_tpl`  (
   `mmt_mail_content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '邮件内容',
   `mmt_short_sign` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '短信签名',
   `mmt_short_code` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '短信模板ID',
+  `mmt_type` int(10) DEFAULT NULL COMMENT '发送场景',
   PRIMARY KEY (`mmt_code`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户消息模板' ROW_FORMAT = Dynamic;
 
