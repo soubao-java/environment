@@ -750,7 +750,7 @@ CREATE TABLE `h5_diy_coupon`  (
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `cp_style` int(11) NOT NULL COMMENT '样式1,2',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   PRIMARY KEY (`cp_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -786,7 +786,7 @@ CREATE TABLE `h5_diy_entrance`  (
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `style` int(255) NOT NULL COMMENT '样式选择，0：正方形 ，1：圆形',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   PRIMARY KEY (`entrance_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -813,7 +813,7 @@ CREATE TABLE `h5_diy_goods`  (
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `layout` int(255) NOT NULL COMMENT '0,默认，1:橱窗式,2:列表式,3:海报式',
   `goods_count` int(255) NOT NULL COMMENT '商品数量',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   `is_show_name` int(255) NOT NULL COMMENT '列表名称是否显示 0默认显示，1隐藏',
   `activity_type` int(255) NOT NULL COMMENT '活动类型 0抢购,1团购，2优惠促销,3预售,4虚拟,5拼团,6。。。',
   `sort_type` int(255) NOT NULL COMMENT '排序方式',
@@ -841,8 +841,8 @@ CREATE TABLE `h5_diy_img`  (
   `img_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '图片主键id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `width` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '宽度',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `width` int(255) NOT NULL COMMENT '宽度',
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   `img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '图片地址',
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '链接地址',
   PRIMARY KEY (`img_id`) USING BTREE
@@ -857,7 +857,7 @@ CREATE TABLE `h5_diy_img_word`  (
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `arrange_type` int(255) NOT NULL COMMENT '排列样式,0:左图右文,1:左文右图,2:上下单图,3:上下双图,4:上下三图,',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '标题',
   `intro` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '简介',
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '链接地址',
@@ -883,8 +883,8 @@ CREATE TABLE `h5_diy_loop_ad`  (
   `loop_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '轮播广告id',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `loop_interval` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '轮播间隔',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+ `loop_interval` int(255) NOT NULL COMMENT '轮播间隔',
+ `below_space` int(11) NOT NULL COMMENT '下间距',
   PRIMARY KEY (`loop_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -909,7 +909,7 @@ CREATE TABLE `h5_diy_loop_goods`  (
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `goods_count` int(255) NOT NULL COMMENT '商品数量',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   `is_show_title` int(255) NOT NULL COMMENT '是否显示列表名称 0：显示',
   `goods_sort` int(255) NOT NULL COMMENT '商品显示排序',
   `title_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '列表名称',
@@ -939,7 +939,7 @@ CREATE TABLE `h5_diy_marketing`  (
   `is_show_name` int(255) NOT NULL COMMENT '0使用列表名称 1不使用列表名称',
   `layout` int(255) NOT NULL COMMENT '0橱窗 ,1列表',
   `activity_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '活动标题',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+   `below_space` int(11) NOT NULL COMMENT '下间距',
   PRIMARY KEY (`marketing_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -951,7 +951,7 @@ CREATE TABLE `h5_diy_news`  (
   `news_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '新闻',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '下间距',
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   `news_count` int(11) NOT NULL COMMENT '新闻个数',
   `news_title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '新闻主题',
   PRIMARY KEY (`news_id`) USING BTREE
@@ -979,8 +979,8 @@ CREATE TABLE `h5_diy_notice`  (
   `notice_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告图片',
   `back_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '背景颜色',
   `word_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字体颜色',
-  `word_sizi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字体大小',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+   `word_sizi` int(255) NOT NULL COMMENT '字体大小',
+ `below_space` int(11) NOT NULL COMMENT '下间距',
   PRIMARY KEY (`notice_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
@@ -1018,7 +1018,7 @@ CREATE TABLE `h5_diy_rich_text`  (
   `page_id` int(11) NOT NULL,
   `em_id` int(11) NOT NULL,
   `back_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `below_space` int(11) NOT NULL COMMENT '下间距',
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`rich_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
@@ -1059,7 +1059,7 @@ CREATE TABLE `h5_diy_text`  (
   `text_site` int(255) NOT NULL COMMENT '左 0 ，中1，右 2',
   `back_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '背景颜色',
   `word_color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '字体颜色',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '下间距',
+ `below_space` int(11) NOT NULL COMMENT '下间距',
   `word_sizi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '字体大小',
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '文本标签',
   `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '路径',
@@ -1074,7 +1074,7 @@ CREATE TABLE `h5_diy_video`  (
   `video_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自定义视频主键',
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+   `below_space` int(11) NOT NULL COMMENT '下间距',
   `video_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '' COMMENT '视频url',
   `video_img` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '视频封面',
   PRIMARY KEY (`video_id`) USING BTREE
@@ -1089,7 +1089,7 @@ CREATE TABLE `h5_diy_window`  (
   `page_id` int(11) NOT NULL COMMENT '页面外键',
   `em_id` int(11) NOT NULL COMMENT '排序外键',
   `window_type` int(255) NOT NULL COMMENT '橱窗样式',
-  `below_space` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '下间距',
+ `below_space` int(11) NOT NULL COMMENT '下间距',
   PRIMARY KEY (`window_id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
