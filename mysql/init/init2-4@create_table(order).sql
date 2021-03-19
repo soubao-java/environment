@@ -294,6 +294,7 @@ CREATE TABLE `order`  (
   `shop_id` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '自提点门店id',
   `deleted` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '用户假删除标识,1:删除,0未删除',
   `order_statis_id` int(1) NULL DEFAULT 0 COMMENT '结算id如果为0为未结算',
+  `mobile_prefix` varchar(10) DEFAULT '' COMMENT '手机区号',
   PRIMARY KEY (`order_id`) USING BTREE,
   UNIQUE INDEX `order_sn`(`order_sn`) USING BTREE,
   INDEX `user_id`(`user_id`) USING BTREE,
